@@ -1,0 +1,12 @@
+[
+    {"DNAM_VAR":"food_name"},
+    {"PRIC_FLO":"food_price"},
+    {"DPRI_FLO":"food_price2"},
+    {"DNBR_VAR":"food_num"},
+    {"DASK_NUM":"dask_num"},
+    {"DCY_DTIM":"food_time"},
+    {"DCY_VAR":"user_time"},
+    {"DC_DTE":"order_time"},
+    {"odno_var":"order_num"},
+    {"USNO_VAR":"user_num"}
+]
