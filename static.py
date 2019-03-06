@@ -13,8 +13,9 @@ def each_file(file_path):
                 ll.append(new_dir)
         else:
             print(new_dir)
-            ll.extend(each_file(new_dir))
-            print(len(ll))
+            h = each_file(new_dir)
+            ll.extend(h)
+            print(len(h))
     return ll
 
 
@@ -31,8 +32,3 @@ for s in ll:
 for k in dd.keys():
     os.remove(k)
 qq = sorted(qq.items(),key=lambda x:x[1])
-
-
-# for k in qq:
-#     print(k[1],k[0])
-# df = pd.read_csv('../data/city_list/行政区对应.txt', sep='|').fillna('')

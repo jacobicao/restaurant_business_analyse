@@ -1,5 +1,2 @@
-XIANGCB
-XIANGCB_BF
-XIANGCB_BF.CSV
-XIANGCB.CSV
-a.csv
+*.csv
+data/
