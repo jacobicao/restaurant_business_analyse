@@ -8,5 +8,6 @@
     {"DCY_VAR":"user_time"},
     {"DC_DTE":"order_time"},
     {"odno_var":"order_num"},
-    {"USNO_VAR":"user_num"}
+    {"USNO_VAR":"user_num"},
+    {"RONO_VAR":"room_no"}
 ]
