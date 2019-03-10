@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 #!/usr/local/bin/python3
-import os, sys
+import os
 dirname = os.path.dirname(os.path.realpath(__file__))
 
 
