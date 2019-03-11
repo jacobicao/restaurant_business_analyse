@@ -4,14 +4,8 @@ Created on Sun Mar 4 21:14:27 2019
 
 @author: Zhijie Cao
 """
-import pandas as pd
 import os
-pd.set_option('display.max_rows',None)
-dirname = os.path.dirname(os.path.realpath(__file__))
-x = ['/data/[XIANGCB_BF].[dbo].[CAI_LIST_OLD].csv',
-     '/data/[XIANGCB_BF].[dbo].[ORDERS_old].csv']
-filename_cai = dirname + x[0]
-filename_order = dirname + x[1]
+import pandas as pd
 
 
 def get_cai(filename):
@@ -61,8 +55,15 @@ def get_order(filename):
     return df
 
 
+dirname = os.path.dirname(os.path.realpath(__file__))
+x = ['/data/[XIANGCB_BF].[dbo].[CAI_LIST_OLD].csv',
+     '/data/[XIANGCB_BF].[dbo].[ORDERS_old].csv']
+filename_cai = dirname + x[0]
+filename_order = dirname + x[1]
+
+
 cai = get_cai(filename_cai)  # len(df) == 1967292
 order = get_order(filename_order) # len(order) == 172199
 
-cai.to_csv('/data/cai.csv')
-order.to_csv('/data/order.csv')
+cai.to_csv(dirname + '/data/cai.csv',index=False)
+order.to_csv(dirname + '/data/order.csv',index=False)
