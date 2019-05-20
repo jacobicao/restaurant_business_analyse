@@ -66,6 +66,8 @@ def plot_daily_orders(daily_group,year):
 
 def plot_daily_sales_mean(daily_group, year):
     daily_sales = daily_group.OPAY_FLO.sum()
+    daily_sales.to_csv('daily_sales.csv')
+    return
     if year is not None:
         plt.figure(figsize=(width, high), dpi=dpi)
         daily_sales[str(year)].plot(style='o-',linewidth=1.0)
@@ -105,6 +107,7 @@ def plot_order_open_time(order):
     
 def plot_monthly_sales(monthly_group):
     monthly_sales = monthly_group.OPAY_FLO.sum()/10000
+    monthly_sales.to_csv('月营业额.csv')
     plt.figure(figsize=(width, high), dpi=dpi)
     monthly_sales[1:-1].plot(style='o-',linewidth=1.0)
     plt.hlines(80,monthly_sales.index[0],
@@ -146,15 +149,28 @@ def plot_weekly_sales(order):
     plt.legend('一二三四五六日')
     plt.savefig(fig + '周1~周7的日均营业额.png')
     plt.close()
+    
 
+def get_corn_time_table(cai):
+    c = cai[['DNAM_VAR','DCY_DTIM']]
+    a = c[c['DNAM_VAR'].str.contains('玉米汁')]
+    a.reset_index(drop=True, inplace=True)
+    a.to_csv('每日玉米汁明细.csv', index=False)
+    b = a.groupby(pd.Grouper(freq='1D', key='DCY_DTIM')).count()
+    b.to_csv('每日玉米汁汇总.csv')
+    b['year'] = b.index.year
+    b['date'] = b.index.month * 100 + b.index.day
+    c = b.pivot(index = 'date', columns = 'year', values = 'DNAM_VAR')
+    c.to_csv('每日玉米汁明细2.csv')
+    
 
 if __name__ == "__main__":
-    pass
-#    cai, order = get_cai_order()
-#    daily_group = order.groupby(
-#            pd.Grouper(key='OOPE_TIM',freq='1d'))
-#    monthly_group = order.groupby(
-#            pd.Grouper(key='OOPE_TIM', freq='1m'))
+    ...
+    cai, order = get_cai_order()
+    daily_group = order.groupby(
+            pd.Grouper(key='OOPE_TIM',freq='1d'))
+    monthly_group = order.groupby(
+            pd.Grouper(key='OOPE_TIM', freq='1m'))
     
     # 日均订单量
 #    plot_daily_orders(daily_group,2018)
@@ -170,6 +186,11 @@ if __name__ == "__main__":
     
     # 周1~周7的日均营业额
 #    plot_weekly_sales(order)
+    
+    # 每日玉米汁销售数量
+    get_corn_time_table(cai)
+    
+
     
     
     
