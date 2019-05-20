@@ -159,7 +159,10 @@ def get_corn_time_table(cai):
     b = a.groupby(pd.Grouper(freq='1D', key='DCY_DTIM')).count()
     b.to_csv('每日玉米汁汇总.csv')
     b['year'] = b.index.year
-    b['date'] = b.index.month * 100 + b.index.day
+#    b['date'] = b.index.month * 100 + b.index.day
+    b['month'] = b.index.month.map(lambda x: str(x).zfill(2))
+    b['day'] = b.index.day.map(lambda x: str(x).zfill(2))
+    b['date'] = b['month'].str.cat(b['day'], sep = '-')
     c = b.pivot(index = 'date', columns = 'year', values = 'DNAM_VAR')
     c.to_csv('每日玉米汁明细2.csv')
     
