@@ -165,6 +165,7 @@ def get_corn_time_table(cai):
     b['date'] = b['month'].str.cat(b['day'], sep = '-')
     c = b.pivot(index = 'date', columns = 'year', values = 'DNAM_VAR')
     c.to_csv('每日玉米汁明细2.csv')
+    c.max(axis=1).to_csv('每日历史最高值.csv')
     
 
 if __name__ == "__main__":
